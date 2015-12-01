@@ -1,0 +1,19 @@
+# ------------------------------------------
+# Test syntax
+
+ansible-playbook --syntax-check <playbook_name>
+
+# ------------------------------------------
+# Execute on local (default)
+
+ansible-playbook <playbook_name> --ask-sudo-pass
+
+# ------------------------------------------
+# Execute on development
+
+ansible-playbook -i inventories/development/hosts <playbook_name>
+
+# ------------------------------------------
+# Execute on production
+
+ansible-playbook -i inventories/production/hosts <playbook_name>

@@ -1,0 +1,19 @@
+# Machine with ansible: ANSIBLE
+# Remote machine: MACHINE
+
+# ------------------------------------------
+# Copy ssh public key for password less access
+# ANSIBLE:
+ssh-copy-id ubuntu@MACHINE_ADDR
+
+# ------------------------------------------
+# Allow ubuntu to run sudo without password
+# MACHINE:
+sudo visudo -f /etc/sudoers.d/passwd-less-ubuntu
+# BEGIN : COPY EXACTLY
+
+# ubuntu user is default user in vm images.
+# For Ansible, it needs passwordless sudo functionality.
+ubuntu ALL=(ALL) NOPASSWD:ALL
+
+# END : COPY EXACTLY

@@ -1,0 +1,21 @@
+# ------------------------------------------
+# Install git and clone repo:
+
+sudo apt-get install git
+# > clone ansible repo here
+
+# ------------------------------------------
+# Install ansible
+
+sudo apt-get install software-properties-common
+sudo apt-add-repository ppa:ansible/ansible
+sudo apt-get update
+sudo apt-get install ansible
+
+
+# ------------------------------------------
+# Enable password less login to remote machines
+cd ~/.ssh
+ssh-keygen -t rsa -b 4096 -C "evan@zigvu.com" -f id_ansible
+# > no key phrase given
+# > Follow instructions in permission_setup.txt

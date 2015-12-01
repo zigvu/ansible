@@ -1,0 +1,15 @@
+---
+# screen
+- name: install screen
+  apt:
+    name: screen
+    state: latest
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: configure screen
+  copy:
+    src: .screenrc
+    dest: /home/ubuntu/.screenrc
+    owner: ubuntu
+    group: ubuntu
