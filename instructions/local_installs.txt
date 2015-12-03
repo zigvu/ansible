@@ -1,4 +1,13 @@
 # ------------------------------------------
-# Atom text editor:
-wget https://github.com/atom/atom/releases/download/v1.2.3/atom-amd64.deb
-sudo dpkg -i atom-amd64.deb
+# Atom text editor plugins/themes:
+
+emmet
+linter
+linter-jshint
+monokai-seti
+seti-icons
+highlight-selected
+linter-coffeelint
+minimap
+pigments
+seti-ui
