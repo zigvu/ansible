@@ -1,0 +1,18 @@
+---
+# ensure that rvm is NOT yet installed prior to running other tasks
+# when rvm is installed it will populate a file
+- stat: path=/usr/local/rvm/scripts/rvm
+  register: rvm_script_present
+
+# get key from rvm maintainer
+- name: install rvm key
+  shell: gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+  when: rvm_script_present.stat.exists == False
+
+# rvm, ruby and rails
+- name: install rvm
+  shell: curl -L https://get.rvm.io | bash -s stable --autolibs=enabled --ruby --rails
+  register: rvm_shell_output
+  when: rvm_script_present.stat.exists == False
+
+- debug: var=rvm_shell_output.stdout_lines

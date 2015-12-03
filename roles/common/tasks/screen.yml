@@ -11,5 +11,6 @@
   copy:
     src: .screenrc
     dest: /home/ubuntu/.screenrc
+    force: no
     owner: ubuntu
     group: ubuntu

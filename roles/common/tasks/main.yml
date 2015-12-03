@@ -1,3 +1,5 @@
 ---
+- include: git.yml tags=git
+- include: gitk.yml tags=gitk
 - include: screen.yml tags=screen
 - include: htop.yml tags=htop

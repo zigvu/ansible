@@ -1,8 +1,14 @@
 ---
+# ensure that atom is not present yet
+- stat: path=/usr/bin/atom
+  register: atom_present
+
 - name: Download atom
   get_url: url={{ atom_url_deb }} dest={{atom_tmp_deb}}
   tags: ["packages","atom"]
+  when: atom_present.stat.exists == False
 
 - name: Install atom for Debian OS family
   apt: deb={{atom_tmp_deb}}
   tags: ["packages","atom"]
+  when: atom_present.stat.exists == False
