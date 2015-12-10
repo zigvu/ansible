@@ -2,5 +2,11 @@
 - hosts: local
   sudo: yes
   roles:
+    - common
+    - tools
     - atom
     - rvm
+    - java
+    - nodejs
+    - chrome
+    - ffmpeg

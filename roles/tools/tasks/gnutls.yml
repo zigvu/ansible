@@ -1,0 +1,8 @@
+---
+# gnutls-bin
+- name: install gnutls-bin
+  apt:
+    name: gnutls-bin
+    state: latest
+    update_cache: true
+    cache_valid_time: 3600

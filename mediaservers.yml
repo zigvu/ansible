@@ -1,0 +1,8 @@
+---
+- hosts: media
+  sudo: yes
+  roles:
+    - common
+    - ffmpeg
+    - xvfb
+    - chrome

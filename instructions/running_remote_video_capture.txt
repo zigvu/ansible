@@ -1,0 +1,42 @@
+# ------------------------------------------
+# REMOTE Instructions:
+
+# Remove all bakground processes related to below
+sudo pkill Xvfb
+fg
+# CTRL + C
+
+# Start Xvfb
+export DISPLAY=:99 && sudo Xvfb :99 -screen 0 1600x1200x24 &
+
+# Start windows manager and VNC server
+export DISPLAY=:99 && fluxbox &
+
+# Start VNC server
+export DISPLAY=:99 && x11vnc -display :99 -bg -nopw -listen localhost -xkb &
+
+# Start Chrome
+export DISPLAY=:99 && google-chrome-stable &
+
+# Follow local instructions and setup video
+
+# Capture video
+# With loss:
+export DISPLAY=:99 && ffmpeg -loglevel error -framerate 25 -video_size 1280x720 -f x11grab -i :99.0+0,0 -c:v libx264 -pix_fmt yuv420p -crf 20 -preset veryfast -f segment -segment_time 60 -reset_timestamps 1 capture%02d.mkv
+
+# For no loss, replace: "-crf 20" with "-qp 0"
+
+# ------------------------------------------
+# LOCAL Instructions:
+
+# Remove all bakground processes related to below
+fg
+# CTRL + C
+
+# SSH to remote
+ssh -N -T -L 5900:localhost:5900 ubuntu@IPADDR &
+
+# Run VNC viewer
+vncviewer -encodings 'copyrect tight hextile' localhost:5900
+
+# Browse chrome to right URL and full screen video

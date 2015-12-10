@@ -1,0 +1,39 @@
+---
+- name: install xvfb
+  apt:
+    name: xvfb
+    state: latest
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: install fonts
+  action: apt pkg={{ item }} state=latest
+  with_items:
+    - xfonts-100dpi
+    - xfonts-75dpi
+    - xfonts-scalable
+    - xfonts-cyrillic
+
+# add windows manager for VNC
+- name: install fluxbox
+  apt:
+    name: fluxbox
+    state: latest
+    update_cache: true
+    cache_valid_time: 3600
+
+# add VNC server
+- name: install x11vnc
+  apt:
+    name: x11vnc
+    state: latest
+    update_cache: true
+    cache_valid_time: 3600
+
+# add position tracker
+- name: install xdotool
+  apt:
+    name: xdotool
+    state: latest
+    update_cache: true
+    cache_valid_time: 3600

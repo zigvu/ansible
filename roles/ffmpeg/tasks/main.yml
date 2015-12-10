@@ -1,0 +1,6 @@
+---
+- stat: path=/usr/local/bin/ffmpeg
+  register: ffmpeg_present
+
+- include: ffmpeg.yml tags=ffmpeg
+  when: ffmpeg_present.stat.exists == False

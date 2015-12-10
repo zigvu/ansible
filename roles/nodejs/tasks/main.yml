@@ -1,0 +1,34 @@
+---
+- name: install nodejs
+  apt:
+    name: nodejs
+    state: latest
+    update_cache: true
+    cache_valid_time: 3600
+
+# create symlink
+- name: install nodejs-legacy
+  apt:
+    name: nodejs-legacy
+    state: latest
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: install npm
+  apt:
+    name: npm
+    state: latest
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: install bower
+  npm:
+    name: bower
+    global: yes
+    state: latest
+
+- name: install http-server
+  npm:
+    name: http-server
+    global: yes
+    state: latest
