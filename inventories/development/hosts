@@ -1,3 +1,7 @@
 # media server that ingests video
 [media]
 158.85.211.94
+
+# web server that manages
+[web]
+158.85.211.94

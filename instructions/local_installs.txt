@@ -11,3 +11,4 @@ linter-coffeelint
 minimap
 pigments
 seti-ui
+atom-beautify

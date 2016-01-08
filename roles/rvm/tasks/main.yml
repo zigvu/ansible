@@ -1,7 +1,7 @@
 ---
 # ensure that rvm is NOT yet installed prior to running other tasks
 # when rvm is installed it will populate a file
-- stat: path=/usr/local/rvm/scripts/rvm
+- stat: path=/home/ubuntu/.rvm/scripts/rvm
   register: rvm_script_present
 
 # get key from rvm maintainer

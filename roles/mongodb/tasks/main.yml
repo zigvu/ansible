@@ -1,0 +1,2 @@
+---
+- include: install_mongodb_noncluster.yml tags=mongodb,noncluster

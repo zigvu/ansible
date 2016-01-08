@@ -7,7 +7,7 @@ fg
 # CTRL + C
 
 # Start Xvfb
-export DISPLAY=:99 && sudo Xvfb :99 -screen 0 1600x1200x24 &
+export DISPLAY=:99 && sudo Xvfb :99 -screen 0 1280x720x24 &
 
 # Start windows manager and VNC server
 export DISPLAY=:99 && fluxbox &

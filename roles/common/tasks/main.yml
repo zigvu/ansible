@@ -1,5 +1,3 @@
 ---
-- include: git.yml tags=git
-- include: gitk.yml tags=gitk
+- include: without_dependencies.yml tags=without_dependencies
 - include: screen.yml tags=screen
-- include: htop.yml tags=htop

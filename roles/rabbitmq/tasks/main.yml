@@ -1,0 +1,2 @@
+---
+- include: install_rabbitmq_noncluster.yml tags=rabbitmq,noncluster

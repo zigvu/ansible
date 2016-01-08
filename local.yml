@@ -1,12 +1,23 @@
 ---
+# run as sudo
 - hosts: local
   sudo: yes
   roles:
     - common
     - tools
     - atom
-    - rvm
     - java
     - nodejs
+    - xvfb
     - chrome
     - ffmpeg
+    - { role: mysql, tags: [noncluster] }
+    - { role: mongodb, tags: [noncluster] }
+    - { role: memcached, tags: [noncluster] }
+    - { role: rabbitmq, tags: [noncluster] }
+
+# run as non-sudo
+- hosts: local
+  sudo: no
+  roles:
+    - rvm
