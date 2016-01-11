@@ -2,6 +2,6 @@
 - name: install jdk
   apt:
     name: openjdk-7-jdk
-    state: latest
+    state: present
     update_cache: true
     cache_valid_time: 3600
