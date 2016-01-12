@@ -1,0 +1,8 @@
+---
+# run as sudo
+- hosts: all
+  sudo: yes
+  roles:
+    - common
+    - hosts
+    - { role: rabbitmq, tags: [cluster] }

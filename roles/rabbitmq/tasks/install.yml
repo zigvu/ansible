@@ -1,4 +1,5 @@
 ---
+# installation only - no cluster setup
 - name: add rabbitmq apt key
   apt_key:
     url: https://www.rabbitmq.com/rabbitmq-signing-key-public.asc
@@ -17,7 +18,9 @@
     cache_valid_time: 3600
 
 - name: enable rabbitmq management plugin
-  rabbitmq_plugin: names=rabbitmq_management state=enabled
+  rabbitmq_plugin:
+     name: rabbitmq_management
+     state: enabled
 
 - name: add admin user to rabbitmq
   rabbitmq_user:

@@ -1,0 +1,32 @@
+[
+ {rabbit,
+  [
+   %% {tcp_listeners, [5672]},
+
+   %% SSL listeners are configured in the same fashion as TCP listeners,
+   %% including the option to control the choice of interface.
+   %% {ssl_listeners, [5671]},
+
+   %% Configuring SSL.
+   %% See http://www.rabbitmq.com/ssl.html for full documentation.
+   %%
+   %% {ssl_options, [{cacertfile,           "/path/to/testca/cacert.pem"},
+   %%                {certfile,             "/path/to/server/cert.pem"},
+   %%                {keyfile,              "/path/to/server/key.pem"},
+   %%                {verify,               verify_peer},
+   %%                {fail_if_no_peer_cert, false}]},
+   %% {ssl_options, [
+   %% {cacertfile, "{{rabbitmq_conf_ssl_options_cacertfile}}"},
+  %%   {certfile, "{{rabbitmq_conf_ssl_options_certfile}}"},
+  %%   {keyfile, "{{rabbitmq_conf_ssl_options_keyfile}}"},
+  %%   {verify, verify_peer},
+  %%   {fail_if_no_peer_cert, false}
+  %%  ]},
+   {cluster_nodes,
+    {
+     [{% for item in groups['all'] %}'rabbit@{{ item }}'{% if not loop.last %},{% endif %}{% endfor %}],
+     disc
+    }
+   }
+  ]}
+].

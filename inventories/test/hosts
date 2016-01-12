@@ -1,0 +1,16 @@
+# azure hosts for testing stack
+
+# media server that ingests video
+[media]
+azvm1 ansible_ssh_host=104.43.173.9
+azvm4 ansible_ssh_host=168.61.220.135
+#azvm5 ansible_ssh_host=168.61.220.146
+#azvm6 ansible_ssh_host=23.99.210.113
+
+# web server that manages rasbari
+[web]
+azvm2 ansible_ssh_host=168.61.170.251
+
+# storage server
+[storage]
+azvm3 ansible_ssh_host=168.61.218.210

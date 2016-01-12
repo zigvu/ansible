@@ -1,0 +1,22 @@
+---
+- name: ensure local private key file exists
+  local_action: stat path=roles/hosts/files/scp_id_rsa
+  register: scp_id_rsa_exist
+  sudo: no
+
+- name: fail if local private key file doesn't exist
+  fail: msg="Couldn't find local private key file in scp_id_rsa"
+  when: not scp_id_rsa_exist.stat.exists
+
+- name: copy private key
+  copy:
+    src: scp_id_rsa
+    dest: /home/ubuntu/.ssh/id_rsa
+    owner: ubuntu
+    group: ubuntu
+    mode: 0600
+
+- name: authorize public key
+  authorized_key:
+    user: ubuntu
+    key: "{{ lookup('file', 'roles/hosts/files/scp_id_rsa.pub') }}"

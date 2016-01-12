@@ -1,2 +1,3 @@
 ---
-- include: install_rabbitmq_noncluster.yml tags=rabbitmq,noncluster
+- include: install.yml tags=rabbitmq,cluster,noncluster
+- include: cluster.yml tags=rabbitmq,cluster

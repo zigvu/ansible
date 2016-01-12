@@ -1,7 +1,7 @@
 # media server that ingests video
 [media]
-158.85.211.94
+vm4 ansible_ssh_host=158.85.211.94
 
-# web server that manages
+# web server that manages rasbari
 [web]
-158.85.211.94
+vm4 ansible_ssh_host=158.85.211.94

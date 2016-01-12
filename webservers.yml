@@ -8,12 +8,10 @@
     - { role: mysql, tags: [noncluster] }
     - { role: mongodb, tags: [noncluster] }
     - { role: memcached, tags: [noncluster] }
-    - { role: rabbitmq, tags: [noncluster] }
 
     # - { role: mysql, tags: [cluster] }
     # - { role: mongodb, tags: [cluster] }
     # - { role: memcached, tags: [cluster] }
-    # - { role: rabbitmq, tags: [cluster] }
 
 # run as non-sudo
 - hosts: web

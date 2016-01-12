@@ -1,0 +1,16 @@
+---
+# handlers file for rabbitmq
+- name: stop rabbitmq-server
+  service:
+    name: rabbitmq-server
+    state: stopped
+
+- name: start rabbitmq-server
+  service:
+    name: rabbitmq-server
+    state: started
+
+- name: restart rabbitmq-server
+  service:
+    name: rabbitmq-server
+    state: restarted

@@ -1,0 +1,13 @@
+---
+# Cluster information
+# RabbitMQ (erlang.cookie)
+rabbitmq_cookie: SUBZLWMUCHEOKYUBOPIO
+rabbitmq_nodename: "rabbit"
+
+rabbitmq_cacert     : "files/rabbitmq_cacert.pem"
+rabbitmq_server_cert: "files/rabbitmq_server_cert.pem"
+rabbitmq_server_key : "files/rabbitmq_server_key.pem"
+
+rabbitmq_conf_ssl_options_cacertfile: "/etc/rabbitmq/ssl/{{ rabbitmq_cacert | basename }}"
+rabbitmq_conf_ssl_options_certfile: "/etc/rabbitmq/ssl/{{ rabbitmq_server_cert | basename }}"
+rabbitmq_conf_ssl_options_keyfile: "/etc/rabbitmq/ssl/{{ rabbitmq_server_key | basename }}"

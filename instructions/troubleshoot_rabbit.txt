@@ -1,0 +1,44 @@
+# When all else fails
+
+# If below command gives sane result, then proceed with removing node using regular commands
+
+sudo rabbitmqctl cluster_status
+
+# If above fails, then it might be necessary to disconnect the node entirely and reconnect
+
+sudo service rabbitmq-server stop
+
+ps aux|grep rabbit
+> sudo kill -9 <pid_from_above>
+
+sudo rm -rf /var/lib/rabbitmq/mnesia
+
+sudo rabbitmq-server -detached
+
+sudo rabbitmqctl cluster_status
+
+# This should give us sane result. If not, repeat above again.
+
+
+# Clustering:
+
+# For the "master" node:
+sudo rabbitmqctl stop_app
+sudo rabbitmqctl start_app
+sudo rabbitmqctl cluster_status
+
+# Ensure that this starts successfully
+
+# For all "slave" nodes:
+
+sudo rabbitmqctl stop_app
+sudo rabbitmqctl reset
+sudo rabbitmqctl cluster_status
+sudo rabbitmqctl join_cluster rabbit@MASTER_NODE
+sudo rabbitmqctl start_app
+sudo rabbitmqctl cluster_status
+
+
+# To expedite running above commands cluster wide:
+
+ansible -i inventories/test/hosts all -a "rabbitmqctl cluster_status" --sudo

@@ -17,3 +17,7 @@ ansible-playbook -i inventories/development/hosts <playbook_name>
 # Execute on production
 
 ansible-playbook -i inventories/production/hosts <playbook_name>
+
+# ------------------------------------------
+# Execute standalone script
+ansible -i inventories/test/hosts all -m shell -a "ssh-keyscan -t ecdsa-sha2-nistp256 168.61.170.251 2>/dev/null"
