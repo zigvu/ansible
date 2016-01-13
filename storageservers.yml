@@ -1,15 +1,13 @@
 ---
 # run as sudo
-- hosts: media
+- hosts: storage
   sudo: yes
   roles:
     - common
-    - ffmpeg
-    - xvfb
-    - chrome
+    - nfs_server
 
 # run as non-sudo
-- hosts: media
+- hosts: storage
   sudo: no
   roles:
     - rvm

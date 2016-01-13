@@ -1,0 +1,27 @@
+---
+- name: install nfs server
+  apt: pkg={{ item }} state=present
+  with_items:
+    - nfs-common
+    - nfs-kernel-server
+
+- name: create data folder
+  file:
+    path: /data
+    state: directory
+
+- name: create share folder
+  file:
+    path: /data/{{ inventory_hostname }}
+    owner: ubuntu
+    group: ubuntu
+    state: directory
+
+- name: update exports folder
+  lineinfile:
+    dest: /etc/exports
+    regexp: '({{ item }})'
+    line: "/data/{{ inventory_hostname }} {{item}}(rw,sync,no_subtree_check)"
+    state: present
+  with_items: groups['web']
+  notify: restart nfs

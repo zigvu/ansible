@@ -8,6 +8,7 @@
     - { role: mysql, tags: [noncluster] }
     - { role: mongodb, tags: [noncluster] }
     - { role: memcached, tags: [noncluster] }
+    - nfs_client
 
     # - { role: mysql, tags: [cluster] }
     # - { role: mongodb, tags: [cluster] }
