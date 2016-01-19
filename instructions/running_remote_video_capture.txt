@@ -1,7 +1,7 @@
 # ------------------------------------------
 # REMOTE Instructions:
 
-# Remove all bakground processes related to below
+# Remove all background processes related to below
 sudo pkill Xvfb
 fg
 # CTRL + C

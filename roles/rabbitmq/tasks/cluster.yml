@@ -1,23 +1,10 @@
 ---
-- name: shutdown rabbitmq to change cookie
-  service:
-    name: rabbitmq-server
-    state: stopped
-
 - name: ensure cookies are the same between all envs
   template:
     src: erlang.cookie.j2
     dest: /var/lib/rabbitmq/.erlang.cookie
-
-- name: start rabbitmq-server
-  service:
-    name: rabbitmq-server
-    state: started
-
-- name: stop rabbitmq-server
-  service:
-    name: rabbitmq-server
-    state: stopped
+  notify:
+    - restart rabbitmq-server
 
 - name: create the ssl folder for rabbitmq
   file:
@@ -42,6 +29,8 @@
 #       dest: "{{ rabbitmq_conf_ssl_options_keyfile }}"
 #     - src: "{{ rabbitmq_server_cert }}"
 #       dest: "{{ rabbitmq_conf_ssl_options_certfile }}"
+#   notify:
+#     - restart rabbitmq-server
 
 - name: generate the configuration of rabbitmq
   template:
@@ -51,8 +40,38 @@
     group: rabbitmq
     mode: 0644
     backup: yes
+  notify:
+    - restart rabbitmq-server
 
-- name: start rabbitmq-server
-  service:
-    name: rabbitmq-server
-    state: started
+# four step process to add node
+- name: add node to cluster (find master node)
+  command: "echo {{ item }}"
+  with_items: groups['all']
+  register: rabbit_master_host
+  when: hostvars[item]['rabbit_master'] is defined
+
+- name: add node to cluster (stop)
+  command: rabbitmqctl stop_app
+  when: hostvars[inventory_hostname]['to_add'] is defined
+
+- name: add node to cluster (join)
+  command: rabbitmqctl join_cluster "rabbit@{{ item.item }}"
+  with_items: rabbit_master_host.results
+  when: item.changed and hostvars[inventory_hostname]['to_add'] is defined
+
+- name: add node to cluster (start)
+  command: rabbitmqctl start_app
+  when: hostvars[inventory_hostname]['to_add'] is defined
+
+# three step process to remove node
+- name: remove node from cluster (stop)
+  command: rabbitmqctl stop_app
+  when: hostvars[inventory_hostname]['to_remove'] is defined
+
+- name: remove node from cluster (reset)
+  command: rabbitmqctl reset
+  when: hostvars[inventory_hostname]['to_remove'] is defined
+
+- name: remove node from cluster (start)
+  command: rabbitmqctl start_app
+  when: hostvars[inventory_hostname]['to_remove'] is defined

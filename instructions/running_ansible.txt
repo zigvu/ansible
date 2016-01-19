@@ -9,14 +9,41 @@ ansible-playbook --syntax-check <playbook_name>
 ansible-playbook <playbook_name> --ask-sudo-pass
 
 # ------------------------------------------
-# Execute on development
+# Execute on <environment>
 
-ansible-playbook -i inventories/development/hosts <playbook_name>
+ansible-playbook -i inventories/<environment>/hosts <playbook_name>
 
 # ------------------------------------------
-# Execute on production
+# Host requirements
 
-ansible-playbook -i inventories/production/hosts <playbook_name>
+1. Hosts are added with hostname, IP and other variables as necessary:
+
+azvm2 ansible_ssh_host=168.61.170.251
+
+2. For clustering, at least one host should have "rabbit_master" set:
+
+azvm2 ansible_ssh_host=168.61.170.251 rabbit_master=True
+
+# ------------------------------------------
+# Add ONE new <host> to inventory:
+
+1. Add <host> to correct inventory hosts file
+2. Tag the newly added <host> as 'to_add':
+
+azvm5 ansible_ssh_host=168.61.220.146 to_add=True
+
+3. Run playbook
+4. Remove the 'to_add' tag from <host>
+
+# ------------------------------------------
+# Remove ONE existing <host> from inventory:
+
+1. Tag the <host> to be removed as 'to_remove':
+
+azvm5 ansible_ssh_host=168.61.220.146 to_remove=True
+
+2. Run playbook
+3. Remove the <host> as well as the 'to_remove' tag from inventory hosts file
 
 # ------------------------------------------
 # Execute standalone script

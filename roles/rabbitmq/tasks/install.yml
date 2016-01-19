@@ -19,8 +19,9 @@
 
 - name: enable rabbitmq management plugin
   rabbitmq_plugin:
-     name: rabbitmq_management
-     state: enabled
+    name: rabbitmq_management
+    state: enabled
+  when: hostvars[inventory_hostname]['rabbit_master'] is defined
 
 - name: add admin user to rabbitmq
   rabbitmq_user:
@@ -32,3 +33,4 @@
     read_priv: .*
     write_priv: .*
     state: present
+  when: hostvars[inventory_hostname]['rabbit_master'] is defined

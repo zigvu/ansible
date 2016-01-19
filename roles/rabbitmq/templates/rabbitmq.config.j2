@@ -17,16 +17,10 @@
    %%                {fail_if_no_peer_cert, false}]},
    %% {ssl_options, [
    %% {cacertfile, "{{rabbitmq_conf_ssl_options_cacertfile}}"},
-  %%   {certfile, "{{rabbitmq_conf_ssl_options_certfile}}"},
-  %%   {keyfile, "{{rabbitmq_conf_ssl_options_keyfile}}"},
-  %%   {verify, verify_peer},
-  %%   {fail_if_no_peer_cert, false}
-  %%  ]},
-   {cluster_nodes,
-    {
-     [{% for item in groups['all'] %}'rabbit@{{ item }}'{% if not loop.last %},{% endif %}{% endfor %}],
-     disc
-    }
-   }
+   %%   {certfile, "{{rabbitmq_conf_ssl_options_certfile}}"},
+   %%   {keyfile, "{{rabbitmq_conf_ssl_options_keyfile}}"},
+   %%   {verify, verify_peer},
+   %%   {fail_if_no_peer_cert, false}
+   %%  ]}
   ]}
 ].

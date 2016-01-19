@@ -4,7 +4,6 @@
     path: /home/ubuntu/.ssh/known_hosts
     state: touch
 
-# hostvars[item]['ansible_ssh_host']
 - name: scan known_hosts file
   shell: "ssh-keygen -f /home/ubuntu/.ssh/known_hosts -F {{ item }} | wc -l"
   with_items: groups['all']
@@ -16,3 +15,12 @@
   shell: "ssh-keyscan -t rsa {{ item.item }} 2>/dev/null >> /home/ubuntu/.ssh/known_hosts"
   with_items: ssh_known_host_results.results
   when: item.has_key('stdout') and item.stdout == "0"
+
+- name: delete host from known hosts file
+  lineinfile:
+    dest: /home/ubuntu/.ssh/known_hosts
+    state: absent
+    create: yes
+    regexp: "^{{ item }}"
+  with_items: groups['all']
+  when: hostvars[item]['to_remove'] is defined
