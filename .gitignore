@@ -6,3 +6,9 @@
 
 # Ignore private key
 /roles/hosts/files/scp_id_rsa
+
+# Ignore host files
+/inventories/local/hosts
+/inventories/development/hosts
+/inventories/production/hosts
+/inventories/test/hosts
