@@ -1,3 +1,0 @@
-# local machine from which to run ansible
-[local]
-localhost ansible_connection=local
