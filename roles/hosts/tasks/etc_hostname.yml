@@ -1,0 +1,7 @@
+---
+- name: copy etc hostname file
+  template:
+    src: etc_hostname.j2
+    dest: /etc/hostname
+  notify:
+    - restart hostname

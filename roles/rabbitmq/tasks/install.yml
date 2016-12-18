@@ -21,7 +21,8 @@
   rabbitmq_plugin:
     name: rabbitmq_management
     state: enabled
-  when: hostvars[inventory_hostname]['rabbit_master'] is defined
+  # to get node statistics in web UI, need to install in every node
+  #when: hostvars[inventory_hostname]['rabbit_master'] is defined
 
 - name: add admin user to rabbitmq
   rabbitmq_user:

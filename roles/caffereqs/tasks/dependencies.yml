@@ -1,0 +1,32 @@
+---
+- apt: update_cache=yes cache_valid_time=3600
+
+- name: install dependencies
+  action: apt pkg={{ item }} state=present
+  with_items:
+    - build-essential
+    - libprotobuf-dev
+    - libleveldb-dev
+    - libsnappy-dev
+    - libopencv-dev
+    - libboost-all-dev
+    - libhdf5-serial-dev
+    - protobuf-compiler
+    - gfortran
+    - libjpeg62
+    - libfreeimage-dev
+    - libatlas-base-dev
+    - libgoogle-glog-dev
+    - libbz2-dev
+    - libxml2-dev
+    - libxslt-dev
+    - libffi-dev
+    - libssl-dev
+    - libgflags-dev
+    - liblmdb-dev
+    - python-dev
+    - python-pip
+    - python-yaml
+    - python-numpy
+    - python-opencv
+    - libgeos-dev

@@ -1,0 +1,17 @@
+# redirection if not HTTPS - currently not handled
+#server {
+#  listen 80 default deferred;
+#  server_name app.zigvu.com;
+#  rewrite ^/(.+) https://app.zigvu.com/$1 permanent;
+#}
+
+server {
+  listen 8989 default;
+  server_name localhost;
+  # listen 443 ssl spdy;
+  # server_name app.zigvu.com;
+  # ssl_certificate /etc/nginx/ssl/rasbari.crt;
+  # ssl_certificate_key /etc/nginx/ssl/rasbari.key;
+
+  root /data/<hostname>/streams; # public folder
+}

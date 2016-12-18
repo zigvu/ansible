@@ -8,6 +8,10 @@ ansible-playbook --syntax-check <playbook_name>
 
 ansible-playbook <playbook_name> --ask-sudo-pass
 
+_or_
+
+ansible-playbook -i inventories/local/hosts local.yml
+
 # ------------------------------------------
 # Execute on <environment>
 

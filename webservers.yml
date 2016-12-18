@@ -5,11 +5,12 @@
   roles:
     - common
     - nodejs
+    - nginx
     - { role: mysql, tags: [noncluster] }
     - { role: mongodb, tags: [noncluster] }
     - { role: memcached, tags: [noncluster] }
-    - nfs_client
-
+    # - nfs_client
+    # Note: these is for when we have load balanced db components
     # - { role: mysql, tags: [cluster] }
     # - { role: mongodb, tags: [cluster] }
     # - { role: memcached, tags: [cluster] }

@@ -1,0 +1,56 @@
+---
+- name: check if cuda is installed
+  command: dpkg-query -W cuda
+  register: cuda_check_deb
+  failed_when: cuda_check_deb.rc > 1
+  changed_when: cuda_check_deb.rc == 1
+
+- name: download cuda package manager
+  get_url:
+    url: "{{ cuda_deb_url }}"
+    dest: "{{ deb_temp_file }}"
+  when: cuda_check_deb.rc == 1
+
+- name: install cuda package manager
+  command: dpkg --force-confold -i "{{ deb_temp_file }}"
+  # apt: deb="{{ deb_temp_file }}" state=installed
+  when: cuda_check_deb.rc == 1
+
+- name: update cache
+  command: apt-get update
+  # apt: update_cache=yes cache_valid_time=3600
+  when: cuda_check_deb.rc == 1
+
+- name: install cuda
+  apt: pkg=cuda state=installed
+  when: cuda_check_deb.rc == 1
+
+- name: add cuda to path
+  lineinfile:
+    dest: /home/ubuntu/.bashrc
+    state: present
+    insertafter: 'EOF'
+    regexp: 'export PATH=\$PATH:{{cuda_path}}'
+    line: 'export PATH=$PATH:{{cuda_path}}'
+  when: cuda_check_deb.rc == 1
+
+- name: add cuda to path
+  lineinfile:
+    dest: /home/ubuntu/.bashrc
+    state: present
+    insertafter: 'EOF'
+    regexp: 'export LD_LIBRARY_PATH=:{{cuda_ld_path}}'
+    line: "export LD_LIBRARY_PATH=:{{cuda_ld_path}}"
+  when: cuda_check_deb.rc == 1
+
+- name: restart remote machine
+  command: shutdown -r now "Ansible updates triggered"
+  async: 0
+  poll: 0
+  ignore_errors: true
+  when: cuda_check_deb.rc == 1
+
+- name: waiting for remote to come back
+  local_action: wait_for host={{ inventory_hostname }} state=started
+  sudo: false
+  when: cuda_check_deb.rc == 1

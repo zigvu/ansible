@@ -1,0 +1,61 @@
+upstream rasbari {
+  server unix:///home/ubuntu/rasbari/tmp/sockets/puma.sock;
+}
+
+# redirection if not HTTPS - currently not handled
+#server {
+#  listen 80 default deferred;
+#  server_name app.zigvu.com;
+#  rewrite ^/(.+) https://app.zigvu.com/$1 permanent;
+#}
+
+server {
+  listen 80 default;
+  server_name localhost;
+  # listen 443 ssl spdy;
+  # server_name app.zigvu.com;
+  # ssl_certificate /etc/nginx/ssl/rasbari.crt;
+  # ssl_certificate_key /etc/nginx/ssl/rasbari.key;
+
+  root /home/ubuntu/rasbari/public; # public of app
+
+  location ^~ /assets/ {
+    gzip_static on;
+
+    # Per RFC2616 - 1 year maximum expiry
+    expires 1y;
+    add_header Cache-Control public;
+
+    # Some browsers still send conditional-GET requests if there's a
+    # Last-Modified header or an ETag header even if they haven't
+    # reached the expiry date sent in the Expires header.
+    add_header Last-Modified "";
+    add_header ETag "";
+  }
+
+  location ^~ /data/<storage_hostname>/streams/ {
+    gzip_static on;
+    expires 1y;
+    add_header Cache-Control public;
+    add_header Last-Modified "";
+    add_header ETag "";
+
+    proxy_pass http://<storage_hostname>:8989/;
+  }
+
+
+  try_files $uri @rasbari;
+  location @rasbari {
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    # proxy_set_header X-Forwarded-Proto https;
+    proxy_set_header X-Forwarded-Proto http;
+    proxy_set_header Host $http_host;
+    proxy_redirect off;
+
+    if (-f $request_filename) {
+      break;
+    }
+
+    proxy_pass http://rasbari;
+  }
+}

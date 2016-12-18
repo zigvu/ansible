@@ -10,7 +10,7 @@
   tags: ["packages","chrome"]
 
 - name: Add Google Chrome repo
-  copy: content="deb http://dl.google.com/linux/chrome/deb/ stable main" dest={{google_apt_file}} owner=root group=root mode=644
+  copy: content="deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" dest={{google_apt_file}} owner=root group=root mode=644
   when: google_apt_exists.stat.exists == False
   tags: ["packages","chrome"]
 

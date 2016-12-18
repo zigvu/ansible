@@ -1,0 +1,5 @@
+---
+cuda_deb_url: "http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1404/x86_64/cuda-repo-ubuntu1404_7.5-18_amd64.deb"
+deb_temp_file: /tmp/cuda-repo-ubuntu1404_7.5-18_amd64.deb
+cuda_path: /usr/local/cuda-7.5/bin
+cuda_ld_path: /usr/local/cuda-7.5/lib64

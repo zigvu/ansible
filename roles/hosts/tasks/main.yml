@@ -1,4 +1,9 @@
 ---
-- include: etc_hosts.yml tags=hosts
-- include: known_hosts.yml tags=hosts
-- include: scp_keys.yml tags=hosts
+- include: etc_hostname.yml
+  tags: hostname
+- include: etc_hosts.yml
+  tags: hosts
+- include: known_hosts.yml
+  tags: hosts
+- include: scp_keys.yml
+  tags: hosts

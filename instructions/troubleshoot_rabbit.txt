@@ -1,3 +1,7 @@
+# After restarting a down node, if it doesn't cluster automatically:
+
+sudo service rabbitmq-server restart
+
 # When all else fails
 
 # If below command gives sane result, then proceed with removing node using regular commands

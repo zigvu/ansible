@@ -1,14 +1,14 @@
 ---
 # run as sudo
-- hosts: storage
+- hosts: gpu
   sudo: yes
   roles:
     - common
-    - nginx
-    # - nfs_server
+    - ffmpeg
+    # - caffereqs
 
 # run as non-sudo
-- hosts: storage
+- hosts: gpu
   sudo: no
   roles:
     - rvm

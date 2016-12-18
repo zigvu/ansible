@@ -1,2 +1,3 @@
 ---
-- include: install_and_secure.yml tags=mysql,noncluster
+- include: install_and_secure.yml
+  tags: mysql,noncluster

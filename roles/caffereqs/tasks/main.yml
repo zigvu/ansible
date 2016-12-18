@@ -1,0 +1,5 @@
+---
+- include: dependencies.yml
+  tags: caffe
+# - include: cuda.yml
+#   tags: caffe

@@ -1,4 +1,8 @@
 ---
-- include: gnutls.yml tags=gnutls
-- include: vncviewer.yml tags=vncviewer
-- include: youtube-dl.yml tags=youtube-dl
+# tool modules
+- name: install common tools
+  action: apt pkg={{ item }} state=present
+  with_items:
+    - gnutls-bin
+    - vncviewer
+    - meld

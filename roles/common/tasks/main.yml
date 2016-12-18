@@ -1,3 +1,7 @@
 ---
-- include: without_dependencies.yml tags=without_dependencies
-- include: screen.yml tags=screen
+- include: without_dependencies.yml
+  tags: without_dependencies
+- include: screen.yml
+  tags: screen
+- include: python_modules.yml
+  tags: python

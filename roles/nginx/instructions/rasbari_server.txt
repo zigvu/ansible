@@ -1,0 +1,18 @@
+# TODO: Convert templates to be usable from Ansible
+# For now, copy/paste and replace those within <brackets>
+
+# Installing in rasbari server
+
+* Copy/paste templates/rasbari.j2 to /etc/nginx/sites-available/rasbari
+* Create new default pointer in /etc/nginx/sites-enabled
+* Modify sites-available/rasbari so that for each storage machine, a new location rule is created
+* sudo service nginx restart
+
+
+# Installing in storage server
+
+* Copy/paste templates/storage.j2 to /etc/nginx/sites-available/storage
+* Create new default pointer in /etc/nginx/sites-enabled
+* Create /data/hostname where data is to be stored
+* Modify sites-available/storage so that server root is where assets are located
+* sudo service nginx restart
