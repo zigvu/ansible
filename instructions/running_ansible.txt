@@ -18,6 +18,11 @@ ansible-playbook -i inventories/local/hosts local.yml
 ansible-playbook -i inventories/<environment>/hosts <playbook_name>
 
 # ------------------------------------------
+# Execute on <single machine> in <environment>
+
+ansible-playbook -i inventories/<environment>/hosts -l <single machine> <playbook_name>
+
+# ------------------------------------------
 # Host requirements
 
 1. Hosts are added with hostname, IP and other variables as necessary:
